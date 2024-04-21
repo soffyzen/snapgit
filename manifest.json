@@ -4,7 +4,7 @@
   "version": "1.2",
   "description": "Allows you to copy your commit messages so you can add description to your PRs.",
   "homepage_url": "https://github.com/soffyzen/snapgit",
-  "permissions": ["clipboardWrite"],
+  "permissions": ["clipboardWrite", "activeTab"],
   "content_scripts": [
     {
       "matches": ["*://*.github.com/*/*/compare/*"],
