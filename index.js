@@ -14,29 +14,28 @@ copyCommitBtn.innerHTML = 'Copy commits';
 btnContainer.insertBefore(copyCommitBtn, btnContainer.firstChild);
 
 const handleButtonClick = () => {
-  const commitMessageContainers = document.getElementsByClassName('TimelineItem-body');
-  console.log(commitMessageContainers.length);
+  const commitMessageContainers = document.querySelectorAll('.TimelineItem-body div div div div code a');
 
   let commitMessages = '';
 
-  commitMessageContainers &&
-    Object.keys(commitMessageContainers).forEach((key) => {
-      const commitElement = commitMessageContainers[key].querySelector('div div div div code a');
+  commitMessageContainers.forEach((commitElement) => {
+    const commitMessage = commitElement.textContent.trim();
+    commitMessages += `- ${commitMessage}\n`;
+  });
 
-      if (commitElement) {
-        const commitMessage = commitElement.textContent.trim();
-        commitMessages += `- ${commitMessage}\n`;
-      }
-    });
+  console.log('Commit Messages:', commitMessages);
 
-  copyCommitsToClipBoard(commitMessages);
-
-  copyCommitBtn.innerHTML = 'Copied to clipboard!';
-
-  setTimeout(() => {
-    copyCommitBtn.innerHTML = 'Copy commits';
-  }, 3000);
+  if (commitMessages) {
+    copyCommitsToClipBoard(commitMessages);
+    copyCommitBtn.innerHTML = 'Copied to clipboard!';
+    setTimeout(() => {
+      copyCommitBtn.innerHTML = 'Copy commits';
+    }, 3000);
+  } else {
+    console.log('No commit messages found.');
+  }
 };
+;
 
 
 const copyCommitsToClipBoard = async (commitMessages) => {
