@@ -15,6 +15,7 @@ btnContainer.insertBefore(copyCommitBtn, btnContainer.firstChild);
 
 const handleButtonClick = () => {
   const commitMessageContainers = document.getElementsByClassName('TimelineItem-body');
+  console.log(commitMessageContainers.length);
 
   let commitMessages = '';
 
