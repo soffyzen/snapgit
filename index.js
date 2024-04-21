@@ -24,7 +24,7 @@ const handleButtonClick = () => {
       const commitElement = commitMessageContainers[key].querySelector('div div div div code a');
 
       if (commitElement) {
-        const commitMessage = commitElement.textContent.trim(); // Get text content and trim
+        const commitMessage = commitElement.textContent.trim();
         commitMessages += `- ${commitMessage}\n`;
       }
     });
@@ -39,17 +39,14 @@ const handleButtonClick = () => {
 };
 
 
-const copyCommitsToClipBoard = (commitMessages) => {
-  const el = document.createElement('textarea');
-
-  el.value = commitMessages;
-
-  document.body.appendChild(el);
-
-  el.select();
-
-  document.execCommand('copy');
-  document.body.removeChild(el);
+const copyCommitsToClipBoard = async (commitMessages) => {
+  try {
+    await navigator.clipboard.writeText(commitMessages);
+    console.log('Copied to clipboard:', commitMessages);
+  } catch (error) {
+    console.error('Failed to copy to clipboard:', error);
+  }
 };
+
 
 btnContainer.addEventListener('click', handleButtonClick);
