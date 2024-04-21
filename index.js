@@ -48,4 +48,5 @@ const copyCommitsToClipBoard = async (commitMessages) => {
 };
 
 
+
 btnContainer.addEventListener('click', handleButtonClick);
