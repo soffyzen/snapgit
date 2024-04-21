@@ -1,0 +1,14 @@
+{
+  "manifest_version": 2,
+  "name": "snapgit",
+  "version": "1.2",
+  "description": "Allows you to copy your commit messages so you can add description to your PRs.",
+  "homepage_url": "https://github.com/soffyzen/snapgit",
+  "permissions": ["clipboardWrite"],
+  "content_scripts": [
+    {
+      "matches": ["*://*.github.com/*/*/compare/*"],
+      "js": ["index.js"]
+    }
+  ]
+}
