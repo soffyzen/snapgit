@@ -14,7 +14,7 @@ copyCommitBtn.innerHTML = 'Copy commits';
 btnContainer.insertBefore(copyCommitBtn, btnContainer.firstChild);
 
 const handleButtonClick = () => {
-  const commitMessageContainers = document.querySelectorAll('.Box .Box-row .flex-auto min-width-0 .commit-title');
+  const commitMessageContainers = document.querySelectorAll('.commits_bucket .TimelineItem-body p');
 
   let commitMessages = '';
 
@@ -38,6 +38,7 @@ const handleButtonClick = () => {
 
 
 
+
 const copyCommitsToClipBoard = async (commitMessages) => {
   try {
     await navigator.clipboard.writeText(commitMessages);
@@ -46,7 +47,6 @@ const copyCommitsToClipBoard = async (commitMessages) => {
     console.error('Failed to copy to clipboard:', error);
   }
 };
-
 
 
 btnContainer.addEventListener('click', handleButtonClick);
