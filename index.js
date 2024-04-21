@@ -14,7 +14,7 @@ copyCommitBtn.innerHTML = 'Copy commits';
 btnContainer.insertBefore(copyCommitBtn, btnContainer.firstChild);
 
 const handleButtonClick = () => {
-  const commitMessageContainers = document.querySelectorAll('.TimelineItem-body div div div div code a');
+  const commitMessageContainers = document.querySelectorAll('.Box .Box-row .flex-auto min-width-0 .commit-title');
 
   let commitMessages = '';
 
@@ -35,7 +35,7 @@ const handleButtonClick = () => {
     console.log('No commit messages found.');
   }
 };
-;
+
 
 
 const copyCommitsToClipBoard = async (commitMessages) => {
