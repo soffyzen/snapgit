@@ -14,21 +14,16 @@ copyCommitBtn.innerHTML = 'Copy commits';
 btnContainer.insertBefore(copyCommitBtn, btnContainer.firstChild);
 
 const handleButtonClick = () => {
-  const commitMessageContainers = document.getElementsByClassName(
-    'TimelineItem-body'
-  );
+  const commitMessageContainers = document.getElementsByClassName('TimelineItem-body');
 
-  let commitMessages = ``;
+  let commitMessages = '';
 
   commitMessageContainers &&
     Object.keys(commitMessageContainers).forEach((key) => {
-      const commitElement = commitMessageContainers[key].querySelector(
-        'div div div div code a'
-      );
+      const commitElement = commitMessageContainers[key].querySelector('div div div div code a');
 
       if (commitElement) {
-        const commitMessage = commitElement.title || '';
-
+        const commitMessage = commitElement.textContent.trim(); // Get text content and trim
         commitMessages += `- ${commitMessage}\n`;
       }
     });
@@ -41,6 +36,7 @@ const handleButtonClick = () => {
     copyCommitBtn.innerHTML = 'Copy commits';
   }, 3000);
 };
+
 
 const copyCommitsToClipBoard = (commitMessages) => {
   const el = document.createElement('textarea');
