@@ -1,52 +1,51 @@
 'use strict';
 
-const btnContainer = document.getElementsByClassName(
+const containerElement = document.getElementsByClassName(
   'd-flex my-2 mx-md-2 flex-md-justify-end'
 )[0];
 
-const copyCommitBtn = document.createElement('button');
+const copyButton = document.createElement('button');
 
-copyCommitBtn.type = 'button';
-copyCommitBtn.className = 'btn btn-secondary';
-copyCommitBtn.style.margin = '0px 10px';
-copyCommitBtn.innerHTML = 'Copy commits';
+copyButton.setAttribute('type', 'button');
+copyButton.setAttribute('class', 'btn btn-secondary');
+copyButton.setAttribute('style', 'margin: 0px 10px;');
+copyButton.textContent = 'Snap the commits';
 
-btnContainer.insertBefore(copyCommitBtn, btnContainer.firstChild);
+containerElement.insertBefore(copyButton, containerElement.firstChild);
 
-const handleButtonClick = () => {
-  const commitMessageContainers = document.querySelectorAll('.commits_bucket .TimelineItem-body p');
+const clickEvent = () => {
+  const commitContainer = document.querySelectorAll('.commits_bucket .TimelineItem-body p');
 
-  let commitMessages = '';
+  let formattedCommits = '';
+  let commitNumber = 1;
 
-  commitMessageContainers.forEach((commitElement) => {
-    const commitMessage = commitElement.textContent.trim();
-    commitMessages += `- ${commitMessage}\n`;
+  commitContainer.forEach((commitElement) => {
+    const commit = commitElement.textContent.trim();
+    formattedCommits += `${commitNumber}. ${commit}\n`;
+    commitNumber++;
   });
 
-  console.log('Commit Messages:', commitMessages);
+  console.log('Commit Messages:', formattedCommits);
 
-  if (commitMessages) {
-    copyCommitsToClipBoard(commitMessages);
-    copyCommitBtn.innerHTML = 'Copied to clipboard!';
+  if (formattedCommits) {
+    snapCommits(formattedCommits);
+    copyButton.textContent = 'Snapped';
     setTimeout(() => {
-      copyCommitBtn.innerHTML = 'Copy commits';
+      copyButton.textContent = 'Snap the commits';
     }, 3000);
   } else {
     console.log('No commit messages found.');
   }
 };
 
-
-
-
-const copyCommitsToClipBoard = async (commitMessages) => {
+const snapCommits = async (formattedCommits) => {
   try {
-    await navigator.clipboard.writeText(commitMessages);
-    console.log('Copied to clipboard:', commitMessages);
+    await navigator.clipboard.writeText(formattedCommits);
+    console.log('Copied to clipboard:', formattedCommits);
   } catch (error) {
     console.error('Failed to copy to clipboard:', error);
   }
 };
 
 
-btnContainer.addEventListener('click', handleButtonClick);
+containerElement.addEventListener('click', clickEvent);
